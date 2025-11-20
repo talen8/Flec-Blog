@@ -42,11 +42,11 @@ jobs:
           
           # 打包构建产物
           cd dist
-          tar -czf ../flec-web_${VERSION}_dist.tar.gz .
+          tar -czf ../flec-blog_${VERSION}_dist.tar.gz .
           cd ..
           
           # 生成校验和
-          sha256sum flec-web_${VERSION}_dist.tar.gz > checksums.txt
+          sha256sum flec-blog_${VERSION}_dist.tar.gz > checksums.txt
 
       - name: 生成 Changelog
         id: changelog
@@ -93,5 +93,5 @@ jobs:
           prerelease: ${{ steps.version.outputs.is_prerelease == 'true' }}
           generate_release_notes: true
           files: |
-            flec-web_*.tar.gz
+            flec-blog_*.tar.gz
             checksums.txt

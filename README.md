@@ -1,4 +1,4 @@
-# Flec-Web
+# Flec-Blog
 
 > 基于 Vue 3 + TypeScript + Pinia 的现代化博客前台展示系统
 
@@ -25,8 +25,8 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/talen8/Flec-Web.git
-cd Flec-Web
+git clone https://github.com/talen8/Flec-Blog.git
+cd Flec-Blog
 
 # 2. 安装依赖
 npm install
@@ -53,4 +53,4 @@ npm run preview  # 预览构建结果
 ## 💬 联系方式
 
 - 📧 Email: talen2004@163.com  
-- 🐛 Issues: [GitHub Issues](https://github.com/talen8/Flec-Web/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/talen8/Flec-Blog/issues)
