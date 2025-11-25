@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { formatDate } from '@/utils/date'
 import { renderSimpleMarkdown } from '@/utils/markdown'
 import { useCommentContext } from '@/composables/useComment'
@@ -20,10 +20,29 @@ const isReplying = computed(() =>
   context.replyState.replyingToId.value === props.comment.id
 )
 
+// 长评论折叠控制（超过 300 字符）
+const MAX_CONTENT_LENGTH = 300
+const isExpanded = ref(false)
+
+const isLongComment = computed(() => 
+  props.comment.content.length > MAX_CONTENT_LENGTH
+)
+
+const displayContent = computed(() => {
+  if (!isLongComment.value || isExpanded.value) {
+    return props.comment.content
+  }
+  return props.comment.content.substring(0, MAX_CONTENT_LENGTH) + '...'
+})
+
 // 渲染评论内容为markdown
 const renderedContent = computed(() =>
-  renderSimpleMarkdown(props.comment.content)
+  renderSimpleMarkdown(displayContent.value)
 )
+
+const toggleExpand = () => {
+  isExpanded.value = !isExpanded.value
+}
 
 // 处理回复按钮点击
 const handleReplyClick = () => {
@@ -73,6 +92,17 @@ const getAvatarUrl = (user: Comment['user']) => {
 
       <!-- 中：内容 -->
       <div class="comment-body markdown-body" v-html="renderedContent"></div>
+      
+      <!-- 长评论展开/折叠按钮 -->
+      <button 
+        v-if="isLongComment" 
+        class="expand-btn" 
+        @click="toggleExpand"
+        aria-label="展开/折叠评论"
+      >
+        {{ isExpanded ? '收起' : '展开全文' }}
+        <i :class="isExpanded ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
+      </button>
 
       <!-- 下：功能按钮 -->
       <div class="comment-actions">
@@ -181,6 +211,29 @@ const getAvatarUrl = (user: Comment['user']) => {
   color: var(--font-color);
   line-height: 1.5;
   word-wrap: break-word;
+}
+
+.expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  color: var(--theme-color);
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--flec-hover-bg);
+  }
+
+  i {
+    font-size: 0.95rem;
+  }
 }
 
 .comment-actions {

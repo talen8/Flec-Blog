@@ -1,7 +1,7 @@
 :root {
   /* 主题色 */
   --theme-color: #49B1F5;
-  --theme-meta-color: #858585;
+  --theme-meta-color: #666666;
 }
 
 [data-theme='light'] {

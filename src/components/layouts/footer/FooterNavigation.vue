@@ -16,7 +16,7 @@ const isExternalLink = (url: string) => {
       :key="menu.id" 
       class="group-item"
     >
-      <h3 class="item-title">{{ menu.title }}</h3>
+      <div class="item-title" role="heading" aria-level="2">{{ menu.title }}</div>
       <nav class="item-content" :aria-label="`${menu.title}导航`">
         <a 
           v-for="child in menu.children" 

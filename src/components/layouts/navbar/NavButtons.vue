@@ -64,16 +64,16 @@ const handleLogout = () => {
 
 <template>
   <div class="nav-button">
-    <button class="brighten" @click="openSearch"><i class="ri-search-line ri-xl"></i></button>
-    <button class="brighten" @click="toggleTheme">
+    <button class="brighten" @click="openSearch" aria-label="搜索"><i class="ri-search-line ri-xl"></i></button>
+    <button class="brighten" @click="toggleTheme" :aria-label="isDark ? '切换到亮色模式' : '切换到暗色模式'">
       <i class="ri-xl" :class="isDark ? 'ri-sun-line' : 'ri-moon-line'"></i>
     </button>
     <!-- 登录按钮 -->
-    <button v-if="!isLoggedIn" class="brighten login-btn" @click="openLogin">
+    <button v-if="!isLoggedIn" class="brighten login-btn" @click="openLogin" aria-label="登录">
       <i class="ri-user-line ri-xl"></i>
     </button>
     <div v-else class="user-menu">
-      <button class="brighten user-btn">
+      <button class="brighten user-btn" aria-label="用户菜单">
         <i class="ri-user-3-fill ri-xl"></i>
       </button>
       <div class="user-dropdown">
@@ -97,7 +97,7 @@ const handleLogout = () => {
         </button>
       </div>
     </div>
-    <button class="button-menu brighten" @click="emit('toggleDrawer')">
+    <button class="button-menu brighten" @click="emit('toggleDrawer')" aria-label="打开菜单">
       <i class="ri-menu-line ri-xl"></i>
     </button>
   </div>

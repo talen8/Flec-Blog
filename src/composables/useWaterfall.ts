@@ -42,7 +42,7 @@ export function useWaterfall(
     const container = document.querySelector(containerSelector);
     if (!container) return;
 
-    const items = Array.from(container.children);
+    const items = Array.from(container.children) as HTMLElement[];
     const containerWidth = container.clientWidth;
     const currentColumns = getResponsiveColumns();
     const columnWidth = (containerWidth - gap * (currentColumns - 1)) / currentColumns;
@@ -50,21 +50,21 @@ export function useWaterfall(
     // 初始化列高度数组
     const columnsHeight = new Array(currentColumns).fill(0);
 
-    items.forEach((item) => {
-      const element = item as HTMLElement;
+    const itemHeights = items.map(item => item.offsetHeight);
 
+    items.forEach((item, index) => {
       // 找到高度最小的列
       const minHeight = Math.min(...columnsHeight);
       const columnIndex = columnsHeight.indexOf(minHeight);
 
       // 设置元素位置
-      element.style.width = `${columnWidth}px`;
-      element.style.position = "absolute";
-      element.style.left = `${columnIndex * (columnWidth + gap)}px`;
-      element.style.top = `${minHeight}px`;
+      item.style.width = `${columnWidth}px`;
+      item.style.position = "absolute";
+      item.style.left = `${columnIndex * (columnWidth + gap)}px`;
+      item.style.top = `${minHeight}px`;
 
       // 更新列高度
-      columnsHeight[columnIndex] = minHeight + element.offsetHeight + gap;
+      columnsHeight[columnIndex] = minHeight + (itemHeights[index] || 0) + gap;
     });
 
     // 设置容器高度
@@ -156,7 +156,9 @@ export function useAdvancedWaterfall(options: AdvancedWaterfallOptions) {
     // 初始化列高度数组
     const columnsHeight = new Array(cols).fill(0)
 
-    items.forEach((item) => {
+    const itemHeights = items.map(item => item.offsetHeight)
+
+    items.forEach((item, index) => {
       // 找到高度最小的列
       const minHeight = Math.min(...columnsHeight)
       const columnIndex = columnsHeight.indexOf(minHeight)
@@ -168,7 +170,7 @@ export function useAdvancedWaterfall(options: AdvancedWaterfallOptions) {
       item.style.top = `${minHeight}px`
 
       // 更新列高度
-      columnsHeight[columnIndex] = minHeight + item.offsetHeight + gap
+      columnsHeight[columnIndex] = minHeight + (itemHeights[index] || 0) + gap
     })
 
     // 设置容器高度

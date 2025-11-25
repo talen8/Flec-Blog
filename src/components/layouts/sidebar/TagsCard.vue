@@ -50,7 +50,7 @@ const getTagSize = (count: number) => {
 
 .card-tag-cloud a {
     font-size: 1.1em;
-    color: #999;
+    color: #666;
     display: inline-block;
     padding: 0 4px;
     line-height: 1.8;
