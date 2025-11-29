@@ -80,7 +80,7 @@ onUnmounted(() => {
 
     <div class="post-copyright"></div>
 
-    <Comments target-type="article" :target-key="article.id" />
+    <Comments target-type="article" :target-key="article.slug" />
   </div>
 </template>
 

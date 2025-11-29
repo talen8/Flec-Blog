@@ -14,7 +14,7 @@ export const useCommentsStore = defineStore('comments', () => {
   /**
    * 获取评论列表
    * @param targetType 目标类型 (article/page)
-   * @param targetKey 目标键值 (文章ID或页面key)
+   * @param targetKey 目标键值 (文章slug或页面key)
    */
   const fetchComments = async (targetType: CommentTargetType, targetKey: string | number) => {
     if (!targetType || !targetKey) return

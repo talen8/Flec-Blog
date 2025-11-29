@@ -13,7 +13,7 @@ import { scrollToElement } from '@/utils/scroll'
 // 组件属性
 const props = defineProps<{
   targetType: CommentTargetType  // 目标类型 (article/page)
-  targetKey: string | number      // 目标键值 (文章ID或页面key)
+  targetKey: string | number      // 目标键值 (文章slug或页面key)
 }>()
 
 // 使用评论 store
@@ -47,7 +47,10 @@ const scrollToComment = (hash?: string | null) => {
 
 // 监听目标变化，自动加载评论
 watch(() => [props.targetType, props.targetKey], ([type, key]) => {
-  fetchComments(type as CommentTargetType, key as string | number)
+  // 只在 targetKey 有效时才加载评论，避免传递 undefined
+  if (key) {
+    fetchComments(type as CommentTargetType, key as string | number)
+  }
 }, { immediate: true })
 
 // 评论加载完成后滚动一次

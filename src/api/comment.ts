@@ -19,7 +19,7 @@ export function getComments(params: GetCommentsParams): Promise<PaginationData<C
   return request.get<PaginationData<Comment>>('/comments', { 
     params: {
       ...params,
-      target_key: String(params.target_key)
+      target_key: params.target_key ? String(params.target_key) : params.target_key
     }
   })
 }
@@ -32,6 +32,6 @@ export function getComments(params: GetCommentsParams): Promise<PaginationData<C
 export function createComment(params: CreateCommentParams): Promise<Comment> {
   return request.post<Comment>('/comments', {
     ...params,
-    target_key: String(params.target_key)
+    target_key: params.target_key ? String(params.target_key) : params.target_key
   })
 }

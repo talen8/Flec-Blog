@@ -39,7 +39,7 @@ export interface GuestInfo {
 export interface CommentContext {
   // 目标类型 (article/page)
   targetType: Ref<CommentTargetType>
-  // 目标键值 (文章ID或页面key)
+  // 目标键值 (文章slug或页面key)
   targetKey: Ref<string | number>
   // 添加评论（顶层评论）
   addComment: (content: string, guestInfo?: GuestInfo) => Promise<void>
