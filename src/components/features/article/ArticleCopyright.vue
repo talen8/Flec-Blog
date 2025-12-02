@@ -48,7 +48,7 @@ const articleUrl = computed(() => window.location.origin + props.article.url)
 
 .post-copyright {
     @extend .cardHover;
-    margin: 40px 0;
+    margin: 30px 0;
     padding: 10px 20px;
     position: relative;
     overflow: hidden;
@@ -116,8 +116,6 @@ const articleUrl = computed(() => window.location.origin + props.article.url)
 
 @media screen and (max-width: 768px) {
     .post-copyright {
-        margin: 30px 0;
-
         .copyright-title {
             font-size: 1.2rem;
             margin-bottom: 6px;
