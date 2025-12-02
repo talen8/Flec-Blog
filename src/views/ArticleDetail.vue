@@ -7,6 +7,7 @@ import ArticleContent from "@/components/features/article/ArticleContent.vue";
 import AISummary from "@/components/features/article/AISummary.vue";
 import ArticleTags from "@/components/features/article/ArticleTags.vue";
 import ArticleCopyright from "@/components/features/article/ArticleCopyright.vue";
+import ArticleNavigation from "@/components/features/article/ArticleNavigation.vue";
 import Comments from "@/components/features/comment/Comments.vue";
 import type { Article } from "../types/article";
 import { SITE_TITLE } from "@/router/index";
@@ -84,6 +85,8 @@ onUnmounted(() => {
     <ArticleCopyright :article="article" />
 
     <ArticleTags :article="article" />
+
+    <ArticleNavigation :prev="article.prev" :next="article.next" />
 
     <Comments target-type="article" :target-key="article.slug" />
   </div>

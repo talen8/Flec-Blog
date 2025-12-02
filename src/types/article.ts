@@ -26,4 +26,12 @@ export interface Article {
     slug: string
     url: string
   }>
+  prev?: {
+    title: string
+    url: string
+  }
+  next?: {
+    title: string
+    url: string
+  }
 }
