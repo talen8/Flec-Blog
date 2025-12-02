@@ -14,11 +14,6 @@ export interface Article {
   publish_time: string
   update_time: string
   location?: string
-  author: {
-    id: number
-    email: string
-    avatar: string
-  }
   category: {
     id: number
     name: string

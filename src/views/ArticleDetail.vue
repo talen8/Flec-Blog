@@ -5,6 +5,7 @@ import { getArticleBySlug } from "../api/article";
 import { useCurrentArticle } from "../composables/useStores";
 import ArticleContent from "@/components/features/article/ArticleContent.vue";
 import AISummary from "@/components/features/article/AISummary.vue";
+import ArticleCopyright from "@/components/features/article/ArticleCopyright.vue";
 import Comments from "@/components/features/comment/Comments.vue";
 import type { Article } from "../types/article";
 import { SITE_TITLE } from "@/router/index";
@@ -79,7 +80,7 @@ onUnmounted(() => {
 
     <ArticleContent :content="article.content" />
 
-    <div class="post-copyright"></div>
+    <ArticleCopyright :article="article" />
 
     <Comments target-type="article" :target-key="article.slug" />
   </div>
