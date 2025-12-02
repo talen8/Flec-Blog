@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-import ArticleSort from "@/components/features/article/ArticleSort.vue";
+import ArticleList from "@/components/features/archive/ArticleList.vue";
 import Pagination from "@/components/ui/Pagination.vue";
 import { useArticles } from "../composables/useStores";
 
@@ -57,21 +57,11 @@ onMounted(() => {
 
 <template>
   <div id="page">
-    <ArticleSort 
-      :articles="articles" 
-      :group-by-year="!isMonthDetail"
-      :title="pageTitle"
-      :total="total"
-    />
-    
+    <ArticleList :articles="articles" :group-by-year="!isMonthDetail" :title="pageTitle" :total="total" />
+
     <!-- 分页 -->
-    <Pagination 
-      v-if="total > (isMonthDetail ? pageSize : 20)"
-      :total="total"
-      :current-page="currentPage"
-      :page-size="isMonthDetail ? pageSize : 20"
-      @change="handlePageChange"
-    />
+    <Pagination v-if="total > (isMonthDetail ? pageSize : 20)" :total="total" :current-page="currentPage"
+      :page-size="isMonthDetail ? pageSize : 20" @change="handlePageChange" />
   </div>
 </template>
 

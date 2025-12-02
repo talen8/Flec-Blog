@@ -4,6 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { getArticleBySlug } from "../api/article";
 import { useCurrentArticle } from "../composables/useStores";
 import ArticleContent from "@/components/features/article/ArticleContent.vue";
+import AISummary from "@/components/features/article/AISummary.vue";
 import Comments from "@/components/features/comment/Comments.vue";
 import type { Article } from "../types/article";
 import { SITE_TITLE } from "@/router/index";
@@ -74,7 +75,7 @@ onUnmounted(() => {
 
 <template>
   <div id="post" v-if="article">
-    <div class="ai-summary"></div>
+    <AISummary v-if="article.ai_summary" :summary="article.ai_summary" />
 
     <ArticleContent :content="article.content" />
 

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import ArticleSort from "@/components/features/article/ArticleSort.vue";
+import ArticleList from "@/components/features/archive/ArticleList.vue";
 import Pagination from "@/components/ui/Pagination.vue";
 import { getCategoryBySlug } from "../api/category";
 import { getArticlesForWeb } from "../api/article";
@@ -20,7 +20,7 @@ const pageSize = ref(10);
 const fetchData = async (page = 1) => {
   const slug = route.params.slug as string;
   currentPage.value = page;
-  
+
   try {
     const [categoryData, articlesData] = await Promise.all([
       getCategoryBySlug(slug),
@@ -30,7 +30,7 @@ const fetchData = async (page = 1) => {
         page_size: pageSize.value
       })
     ]);
-    
+
     category.value = categoryData;
     articles.value = articlesData.list;
     total.value = articlesData.total;
@@ -65,21 +65,11 @@ watch(category, (newCategory) => {
 
 <template>
   <div id="page">
-    <ArticleSort 
-      v-if="category"
-      :articles="articles"
-      :title="`分类 - ${category.name}`"
-      :total="total"
-    />
-    
+    <ArticleList v-if="category" :articles="articles" :title="`分类 - ${category.name}`" :total="total" />
+
     <!-- 分页 -->
-    <Pagination 
-      v-if="category && total > pageSize"
-      :total="total"
-      :current-page="currentPage"
-      :page-size="pageSize"
-      @change="handlePageChange"
-    />
+    <Pagination v-if="category && total > pageSize" :total="total" :current-page="currentPage" :page-size="pageSize"
+      @change="handlePageChange" />
   </div>
 </template>
 
@@ -105,4 +95,3 @@ watch(category, (newCategory) => {
   }
 }
 </style>
-

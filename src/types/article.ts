@@ -5,6 +5,7 @@ export interface Article {
   url: string
   content: string
   summary: string
+  ai_summary?: string
   excerpt?: string
   cover?: string
   is_top: boolean

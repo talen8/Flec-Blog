@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import ArticleSort from "@/components/features/article/ArticleSort.vue";
+import ArticleList from "@/components/features/archive/ArticleList.vue";
 import Pagination from "@/components/ui/Pagination.vue";
 import { getTagBySlug } from "../api/tag";
 import { getArticlesForWeb } from "../api/article";
@@ -20,7 +20,7 @@ const pageSize = ref(10);
 const fetchData = async (page = 1) => {
   const slug = route.params.slug as string;
   currentPage.value = page;
-  
+
   try {
     const [tagData, articlesData] = await Promise.all([
       getTagBySlug(slug),
@@ -30,7 +30,7 @@ const fetchData = async (page = 1) => {
         page_size: pageSize.value
       })
     ]);
-    
+
     tag.value = tagData;
     articles.value = articlesData.list;
     total.value = articlesData.total;
@@ -65,21 +65,11 @@ watch(tag, (newTag) => {
 
 <template>
   <div id="page">
-    <ArticleSort 
-      v-if="tag"
-      :articles="articles"
-      :title="`标签 - ${tag.name}`"
-      :total="total"
-    />
-    
+    <ArticleList v-if="tag" :articles="articles" :title="`标签 - ${tag.name}`" :total="total" />
+
     <!-- 分页 -->
-    <Pagination 
-      v-if="tag && total > pageSize"
-      :total="total"
-      :current-page="currentPage"
-      :page-size="pageSize"
-      @change="handlePageChange"
-    />
+    <Pagination v-if="tag && total > pageSize" :total="total" :current-page="currentPage" :page-size="pageSize"
+      @change="handlePageChange" />
   </div>
 </template>
 
@@ -105,4 +95,3 @@ watch(tag, (newTag) => {
   }
 }
 </style>
-
